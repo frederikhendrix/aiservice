@@ -16,7 +16,7 @@ namespace AiService.Services
 
         public async Task<string> CheckServerAvailability()
         {
-            _httpClient.BaseAddress = new Uri("http://localhost:11434"); // Ensure this is set correctly
+            _httpClient.BaseAddress = new Uri("http://host.docker.internal:11434"); // Ensure this is set correctly
             try
             {
                 var response = await _httpClient.GetAsync("");
@@ -50,7 +50,7 @@ namespace AiService.Services
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync("http://localhost:11434/api/generate", requestContent);
+            var response = await _httpClient.PostAsync("http://host.docker.internal:11434/api/generate", requestContent);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Failed to get response: {response.StatusCode}");
